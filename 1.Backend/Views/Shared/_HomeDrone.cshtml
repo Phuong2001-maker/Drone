@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TNFlying - Vietnam Drone Hub</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                DEFAULT: '#2773ad', // Màu chủ đạo
+                dark: '#1e5f8f',
+                light: '#e0f2fe',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@@latest"></script>
+    
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc;
+        color: #334155;
+      }
+      .dropdown:hover .dropdown-menu {
+        display: block;
+        animation: fadeIn 0.2s ease-in-out;
+      }
+      /* Animation utility class specifically for scroll trigger */
+      .opacity-0-start {
+        opacity: 0;
+      }
+      @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      /* Ẩn hiện tab */
+      .view-section { display: none; }
+      .view-section.active { display: block; }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "@@google/genai": "https://aistudiocdn.com/@@google/genai@@^1.30.0",
+    "react": "https://aistudiocdn.com/react@@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@@^0.554.0",
+    "react/": "https://aistudiocdn.com/react@@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body class="flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-brand shadow-lg border-b border-blue-800 animate__animated animate__fadeInDown">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo -->
+          <div class="flex items-center cursor-pointer gap-3" onclick="scrollToSection('view-home')">
+            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-md hover:animate__animated hover:animate__swing">
+              <i data-lucide="plane" class="text-brand w-6 h-6 transform -rotate-45"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xl font-bold text-white leading-none">TNFlying</span>
+              <span class="text-xs text-blue-100 font-medium tracking-wider mt-0.5">VIETNAM DRONE HUB</span>
+            </div>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden lg:flex items-center space-x-1">
+            
+            <button onclick="scrollToSection('about-section')" class="px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors">
+              Giới thiệu
+            </button>
+
+            <!-- Sản phẩm Dropdown -->
+            <div class="relative dropdown group">
+              <button class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors">
+                Sản phẩm <i data-lucide="chevron-down" class="w-4 h-4 text-blue-200"></i>
+              </button>
+              <div class="dropdown-menu absolute left-0 mt-0 w-72 bg-white rounded-lg shadow-xl hidden pt-2 z-50 border border-gray-100">
+                <div class="py-2">
+                    <a href="#" onclick="scrollToSection('products-section'); return false;" class="flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 group/item border-b border-gray-50">
+                        <div class="bg-blue-100 p-2 rounded-md group-hover/item:bg-brand group-hover/item:text-white transition-colors">
+                            <i data-lucide="camera" class="w-5 h-5 text-brand group-hover/item:text-white"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold block text-slate-800 group-hover/item:text-brand">Drone (Flycam)</span>
+                            <span class="text-xs text-gray-500 font-light">Quay phim, Nông nghiệp</span>
+                        </div>
+                    </a>
+                    <a href="#" onclick="scrollToSection('products-section'); return false;" class="flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 group/item border-b border-gray-50">
+                        <div class="bg-blue-100 p-2 rounded-md group-hover/item:bg-brand group-hover/item:text-white transition-colors">
+                            <i data-lucide="box" class="w-5 h-5 text-brand group-hover/item:text-white"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold block text-slate-800 group-hover/item:text-brand">Khung (Frame)</span>
+                            <span class="text-xs text-gray-500 font-light">Carbon fiber, 3-7 inch</span>
+                        </div>
+                    </a>
+                    <a href="#" onclick="scrollToSection('products-section'); return false;" class="flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 group/item border-b border-gray-50">
+                        <div class="bg-blue-100 p-2 rounded-md group-hover/item:bg-brand group-hover/item:text-white transition-colors">
+                            <i data-lucide="gamepad-2" class="w-5 h-5 text-brand group-hover/item:text-white"></i>
+                        </div>
+                        <div>
+                             <span class="font-semibold block text-slate-800 group-hover/item:text-brand">Bộ điều khiển</span>
+                             <span class="text-xs text-gray-500 font-light">FC, ESC, Remote</span>
+                        </div>
+                    </a>
+                    <a href="#" onclick="scrollToSection('products-section'); return false;" class="flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 group/item">
+                        <div class="bg-blue-100 p-2 rounded-md group-hover/item:bg-brand group-hover/item:text-white transition-colors">
+                            <i data-lucide="cpu" class="w-5 h-5 text-brand group-hover/item:text-white"></i>
+                        </div>
+                        <div>
+                            <span class="font-semibold block text-slate-800 group-hover/item:text-brand">Mạch điện tử</span>
+                            <span class="text-xs text-gray-500 font-light">Vtx, Rx, GPS, Pin</span>
+                        </div>
+                    </a>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="scrollToSection('projects-section')" class="px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors">
+              Dự án
+            </button>
+            
+            <button onclick="scrollToSection('map-section')" class="px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors flex items-center gap-1">
+              <i data-lucide="map" class="w-4 h-4 text-blue-200"></i> Bản đồ bay
+            </button>
+
+            <!-- Kiến thức Dropdown -->
+            <div class="relative dropdown group">
+              <button class="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors">
+                Kiến thức <i data-lucide="chevron-down" class="w-4 h-4 text-blue-200"></i>
+              </button>
+              <div class="dropdown-menu absolute left-0 mt-0 w-64 bg-white rounded-lg shadow-xl hidden pt-2 z-50 border border-gray-100">
+                <div class="py-2">
+                    <a href="#" onclick="scrollToSection('knowledge-section'); return false;" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-brand group/item">
+                        <i data-lucide="book-open" class="w-4 h-4 text-gray-400 group-hover/item:text-brand"></i>
+                        Hướng dẫn sử dụng
+                    </a>
+                    <a href="#" onclick="scrollToSection('knowledge-section'); return false;" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-brand group/item">
+                        <i data-lucide="shield-alert" class="w-4 h-4 text-gray-400 group-hover/item:text-brand"></i>
+                        An toàn bay
+                    </a>
+                    <a href="#" onclick="scrollToSection('knowledge-section'); return false;" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-brand group/item">
+                        <i data-lucide="wrench" class="w-4 h-4 text-gray-400 group-hover/item:text-brand"></i>
+                        Các lỗi thường gặp
+                    </a>
+                    <a href="#" onclick="scrollToSection('knowledge-section'); return false;" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-brand group/item">
+                        <i data-lucide="newspaper" class="w-4 h-4 text-gray-400 group-hover/item:text-brand"></i>
+                        Tin công nghệ
+                    </a>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="scrollToSection('training-section')" class="px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors">
+              Đào tạo
+            </button>
+
+            <button onclick="scrollToSection('contact-section')" class="px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-md transition-colors">
+              Liên hệ
+            </button>
+            
+            <!-- Search Button -->
+            <button onclick="toggleSearch()" class="ml-2 p-2 rounded-full text-white hover:bg-white/20 transition-colors" title="Tìm kiếm">
+               <i data-lucide="search" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="-mr-2 flex lg:hidden items-center gap-2">
+            <button onclick="toggleSearch()" class="p-2 rounded-full text-white hover:bg-white/20 transition-colors">
+               <i data-lucide="search" class="w-6 h-6"></i>
+            </button>
+            <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10 focus:outline-none">
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Search Overlay Bar -->
+      <div id="search-bar" class="hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-brand/20 z-40 transition-all duration-300">
+          <div class="max-w-7xl mx-auto px-4 py-4">
+              <div class="relative">
+                  <input type="text" id="search-input" onkeyup="handleSearch(this.value)" placeholder="Tìm kiếm sản phẩm, dự án, bài viết..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none text-gray-700 bg-slate-50">
+                  <i data-lucide="search" class="absolute left-4 top-3.5 w-5 h-5 text-gray-400"></i>
+                  <button onclick="toggleSearch()" class="absolute right-3 top-2.5 p-1 text-gray-400 hover:text-red-500 rounded-full hover:bg-red-50">
+                      <i data-lucide="x" class="w-5 h-5"></i>
+                  </button>
+              </div>
+              <!-- Search Results Container -->
+              <div id="search-results" class="mt-2 max-h-60 overflow-y-auto hidden rounded-lg border border-gray-100 shadow-inner bg-white">
+                  <!-- Results will be injected here via JS -->
+              </div>
+          </div>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-brand border-t border-blue-800">
+         <div class="px-2 pt-2 pb-3 space-y-1">
+            <button onclick="scrollToSection('about-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Giới thiệu</button>
+            <button onclick="scrollToSection('products-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Sản phẩm</button>
+            <button onclick="scrollToSection('projects-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Dự án</button>
+            <button onclick="scrollToSection('map-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Bản đồ bay</button>
+            <button onclick="scrollToSection('knowledge-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Kiến thức</button>
+            <button onclick="scrollToSection('training-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Đào tạo</button>
+            <button onclick="scrollToSection('contact-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10">Liên hệ</button>
+         </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow bg-slate-50">
+      
+      <!-- VIEW: HOME -->
+      <div id="view-home" class="view-section active">
+        
+        <!-- Hero Section -->
+        <div class="relative bg-white overflow-hidden h-[600px] md:h-[700px]">
+            <div class="absolute inset-0">
+                <!-- Static Background Image -->
+                <img src="https://vietflycam.vn/wp-content/uploads/2025/10/Bia-web-VFC-02-scaled.jpg" alt="Drone Background" class="w-full h-full object-cover">
+                <!-- Enhanced Gradient Overlay for Text Contrast -->
+                <!-- Darker on the left (slate-900/90) fading to lighter on the right (slate-900/20) -->
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-slate-900/20"></div>
+            </div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 h-full flex items-center">
+                <div class="md:w-3/5">
+                    <span class="inline-block py-1 px-3 rounded-full bg-brand/90 text-white text-xs font-bold uppercase tracking-wider mb-4 border border-brand/20 animate__animated animate__fadeInDown backdrop-blur-sm shadow-sm">
+                        Công nghệ tiên phong
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight animate__animated animate__fadeInLeft animate__delay-1s drop-shadow-md">
+                        Chinh phục bầu trời <br/>
+                        <span class="text-blue-300">TNFlying Drone Hub</span>
+                    </h1>
+                    <p class="text-lg text-blue-50 font-medium mb-8 max-w-2xl leading-relaxed animate__animated animate__fadeInLeft animate__delay-1s drop-shadow-sm bg-black/20 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                        Cung cấp giải pháp máy bay không người lái toàn diện: Từ thiết bị, linh kiện, đào tạo bay đến các dịch vụ quay phim và nông nghiệp công nghệ cao.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 animate__animated animate__fadeInUp animate__delay-2s">
+                        <button onclick="scrollToSection('products-section')" class="px-8 py-4 bg-brand hover:bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-900/30 transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
+                            Khám phá ngay <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                        <button onclick="scrollToSection('contact-section')" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/30 shadow-sm flex items-center justify-center gap-2 hover:-translate-y-1 backdrop-blur-sm transition-all">
+                            Liên hệ tư vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about-section" class="bg-white py-16 border-b border-slate-100 scroll-trigger opacity-0-start" data-animate="animate__fadeInUp">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Về TNFlying</h2>
+                <p class="text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
+                    Được thành lập bởi đội ngũ kỹ sư đam mê hàng không, TNFlying không chỉ là nơi cung cấp thiết bị mà còn là trung tâm đào tạo và chuyển giao công nghệ drone hàng đầu. Chúng tôi cam kết mang lại giá trị thực tiễn cho nông nghiệp, công nghiệp và nghệ thuật.
+                </p>
+            </div>
+        </div>
+
+        <!-- Statistics Section (Numbers Speak) -->
+        <div id="stats-section" class="bg-brand py-16 text-white scroll-trigger opacity-0-start" data-animate="animate__fadeIn">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-blue-400/30">
+                    <div class="p-4 group cursor-default">
+                        <div class="flex items-center justify-center mb-4">
+                            <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">
+                                <i data-lucide="briefcase" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center">
+                            <span class="counter-value" data-target="500">0</span><span>+</span>
+                        </h3>
+                        <p class="text-blue-100 font-medium uppercase tracking-wider">Dự án thực tế</p>
+                    </div>
+                    <div class="p-4 group cursor-default">
+                         <div class="flex items-center justify-center mb-4">
+                            <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">
+                                <i data-lucide="plane" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center">
+                            <span class="counter-value" data-target="1000">0</span><span>+</span>
+                        </h3>
+                        <p class="text-blue-100 font-medium uppercase tracking-wider">Drone cung cấp</p>
+                    </div>
+                    <div class="p-4 group cursor-default">
+                        <div class="flex items-center justify-center mb-4">
+                            <div class="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors">
+                                <i data-lucide="users" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 flex justify-center items-center">
+                            <span class="counter-value" data-target="200">0</span><span>+</span>
+                        </h3>
+                        <p class="text-blue-100 font-medium uppercase tracking-wider">Học viên đào tạo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section (Carousel) -->
+        <div id="products-section" class="py-20 bg-slate-50 overflow-hidden">
+           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative group/carousel">
+              <div class="flex justify-between items-end mb-10 scroll-trigger opacity-0-start" data-animate="animate__fadeInLeft">
+                  <div>
+                    <h2 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+                        <div class="w-2 h-8 bg-brand rounded-full"></div>
+                        Sản phẩm nổi bật
+                    </h2>
+                  </div>
+                  <!-- Navigation Buttons -->
+                  <div class="flex gap-2">
+                    <button onclick="scrollCarousel('products-container', 'left')" class="p-2 rounded-full border border-slate-300 hover:bg-white hover:shadow-md transition-all text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                    <button onclick="scrollCarousel('products-container', 'right')" class="p-2 rounded-full border border-slate-300 hover:bg-white hover:shadow-md transition-all text-slate-600"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                  </div>
+              </div>
+              
+              <!-- Carousel Container -->
+              <div id="products-container" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth no-scrollbar">
+                  
+                  <!-- Items with Fixed Unsplash IDs -->
+                  <div class="search-item min-w-[280px] md:min-w-[300px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                      <div class="h-60 bg-slate-100 p-4 flex items-center justify-center relative">
+                          <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&q=80&w=600" alt="DJI Mini 4 Pro" class="w-full h-full object-contain group-hover:scale-110 transition-transform"/>
+                          <span class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">HOT</span>
+                      </div>
+                      <div class="p-5">
+                          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Drone</div>
+                          <h3 class="search-title text-lg font-bold text-slate-800 mb-2 truncate">DJI Mini 4 Pro Combo</h3>
+                          <div class="flex items-center justify-between">
+                              <span class="text-brand font-bold text-lg">Liên hệ</span>
+                              <button class="text-slate-400 hover:text-brand"><i data-lucide="shopping-cart" class="w-5 h-5"></i></button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="search-item min-w-[280px] md:min-w-[300px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                      <div class="h-60 bg-slate-100 p-4 flex items-center justify-center relative">
+                          <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=600" alt="Carbon Frame" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+                      </div>
+                      <div class="p-5">
+                          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Khung</div>
+                          <h3 class="search-title text-lg font-bold text-slate-800 mb-2 truncate">Mark4 5-inch Carbon</h3>
+                          <div class="flex items-center justify-between">
+                              <span class="text-brand font-bold text-lg">Liên hệ</span>
+                              <button class="text-slate-400 hover:text-brand"><i data-lucide="shopping-cart" class="w-5 h-5"></i></button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="search-item min-w-[280px] md:min-w-[300px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                      <div class="h-60 bg-slate-100 p-4 flex items-center justify-center relative">
+                          <img src="https://images.unsplash.com/photo-1551733604-0d7037500332?auto=format&fit=crop&q=80&w=600" alt="Flight Controller" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+                      </div>
+                      <div class="p-5">
+                          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Controller</div>
+                          <h3 class="search-title text-lg font-bold text-slate-800 mb-2 truncate">SpeedyBee F405 V3</h3>
+                          <div class="flex items-center justify-between">
+                              <span class="text-brand font-bold text-lg">Liên hệ</span>
+                              <button class="text-slate-400 hover:text-brand"><i data-lucide="shopping-cart" class="w-5 h-5"></i></button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="search-item min-w-[280px] md:min-w-[300px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                      <div class="h-60 bg-slate-100 p-4 flex items-center justify-center relative">
+                          <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=600" alt="DJI Air 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+                      </div>
+                      <div class="p-5">
+                          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Drone</div>
+                          <h3 class="search-title text-lg font-bold text-slate-800 mb-2 truncate">DJI Air 3 Fly More</h3>
+                          <div class="flex items-center justify-between">
+                              <span class="text-brand font-bold text-lg">Liên hệ</span>
+                              <button class="text-slate-400 hover:text-brand"><i data-lucide="shopping-cart" class="w-5 h-5"></i></button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="search-item min-w-[280px] md:min-w-[300px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                      <div class="h-60 bg-slate-100 p-4 flex items-center justify-center relative">
+                          <img src="https://images.unsplash.com/photo-1521405924368-64c5b84bec60?auto=format&fit=crop&q=80&w=600" alt="Gimbal" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+                      </div>
+                      <div class="p-5">
+                          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Gimbal</div>
+                          <h3 class="search-title text-lg font-bold text-slate-800 mb-2 truncate">DJI RS 3 Pro</h3>
+                          <div class="flex items-center justify-between">
+                              <span class="text-brand font-bold text-lg">Liên hệ</span>
+                              <button class="text-slate-400 hover:text-brand"><i data-lucide="shopping-cart" class="w-5 h-5"></i></button>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="search-item min-w-[280px] md:min-w-[300px] snap-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                      <div class="h-60 bg-slate-100 p-4 flex items-center justify-center relative">
+                          <img src="https://images.unsplash.com/photo-1589254065878-42c9da2e2ffa?auto=format&fit=crop&q=80&w=600" alt="Battery" class="w-full h-full object-cover group-hover:scale-110 transition-transform"/>
+                      </div>
+                      <div class="p-5">
+                          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Pin</div>
+                          <h3 class="search-title text-lg font-bold text-slate-800 mb-2 truncate">Tattu R-Line V5.0</h3>
+                          <div class="flex items-center justify-between">
+                              <span class="text-brand font-bold text-lg">Liên hệ</span>
+                              <button class="text-slate-400 hover:text-brand"><i data-lucide="shopping-cart" class="w-5 h-5"></i></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+           </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div id="projects-section" class="py-20 bg-white border-t border-slate-100">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+             <div class="mb-10 scroll-trigger opacity-0-start" data-animate="animate__fadeInLeft">
+                <h2 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+                    <div class="w-2 h-8 bg-brand rounded-full"></div>
+                    Dự án đã thực hiện
+                </h2>
+                <p class="text-slate-500 mt-2 ml-5">Những giải pháp thực tế chúng tôi đã triển khai thành công</p>
+             </div>
+             
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project Item (Fixed Images) -->
+                <div class="search-item group cursor-pointer scroll-trigger opacity-0-start" data-animate="animate__fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="relative h-64 rounded-xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1625246333195-09d9b63bd48a?auto=format&fit=crop&q=80&w=600" alt="Nông nghiệp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
+                        <div class="absolute top-4 left-4 bg-brand text-white text-xs font-bold px-3 py-1 rounded-full">Nông nghiệp</div>
+                    </div>
+                    <h3 class="search-title text-xl font-bold text-slate-800 mb-2 group-hover:text-brand transition-colors">Phun thuốc tự động Đồng Tháp</h3>
+                    <p class="text-slate-500 text-sm line-clamp-2">Triển khai đội bay DJI Agras T40 cho 500ha lúa, giúp tăng năng suất 200%.</p>
+                </div>
+                <!-- Project Item -->
+                <div class="search-item group cursor-pointer scroll-trigger opacity-0-start" data-animate="animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="relative h-64 rounded-xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1527011046414-4781f1f94f8c?auto=format&fit=crop&q=80&w=600" alt="Sự kiện" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
+                        <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">Sự kiện</div>
+                    </div>
+                    <h3 class="search-title text-xl font-bold text-slate-800 mb-2 group-hover:text-brand transition-colors">Drone Light Show Hạ Long</h3>
+                    <p class="text-slate-500 text-sm line-clamp-2">Trình diễn nghệ thuật ánh sáng với 200 drone tạo hình rồng bay.</p>
+                </div>
+                <!-- Project Item -->
+                <div class="search-item group cursor-pointer scroll-trigger opacity-0-start" data-animate="animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="relative h-64 rounded-xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=600" alt="Khảo sát" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
+                        <div class="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">Khảo sát</div>
+                    </div>
+                    <h3 class="search-title text-xl font-bold text-slate-800 mb-2 group-hover:text-brand transition-colors">Bản đồ số 3D KCN Bắc Ninh</h3>
+                    <p class="text-slate-500 text-sm line-clamp-2">Dựng mô hình 3D chính xác 99% phục vụ công tác quy hoạch khu công nghiệp.</p>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <!-- NEW SECTION: Map -->
+        <div id="map-section" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-10 scroll-trigger opacity-0-start" data-animate="animate__fadeInDown">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Bản đồ vùng bay</h2>
+                    <p class="text-slate-500">Tra cứu các khu vực được phép bay và vùng cấm bay theo quy định.</p>
+                 </div>
+                 <div class="bg-white p-4 rounded-xl shadow-lg border border-slate-200 h-[500px] relative overflow-hidden scroll-trigger opacity-0-start" data-animate="animate__zoomIn">
+                     <!-- Placeholder Map Image using a random map-like image -->
+                     <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=1600" alt="Map Placeholder" class="w-full h-full object-cover rounded-lg filter brightness-90">
+                     <div class="absolute inset-0 flex items-center justify-center">
+                         <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl text-center border border-brand/20 max-w-md">
+                             <div class="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="map" class="w-8 h-8 text-brand"></i>
+                             </div>
+                             <h3 class="text-xl font-bold text-slate-800 mb-2">Hệ thống bản đồ số</h3>
+                             <p class="text-slate-600 mb-6">Đang tải dữ liệu vùng bay thời gian thực từ Cục Tác chiến...</p>
+                             <button class="px-6 py-2 bg-brand text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                                 Tải lại bản đồ
+                             </button>
+                         </div>
+                     </div>
+                     <!-- Decorative Pins -->
+                     <div class="absolute top-1/3 left-1/4 animate-bounce duration-1000">
+                         <i data-lucide="map-pin" class="w-8 h-8 text-red-500 drop-shadow-lg"></i>
+                     </div>
+                     <div class="absolute bottom-1/3 right-1/3 animate-bounce duration-1000 delay-500">
+                         <i data-lucide="map-pin" class="w-8 h-8 text-brand drop-shadow-lg"></i>
+                     </div>
+                 </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Section (Carousel 2 rows x 3 cols) -->
+        <div id="knowledge-section" class="py-20 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-10 scroll-trigger opacity-0-start" data-animate="animate__fadeInLeft">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+                            <div class="w-2 h-8 bg-brand rounded-full"></div>
+                            Kiến thức & Hướng dẫn
+                        </h2>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="scrollCarousel('knowledge-container', 'left')" class="p-2 rounded-full border border-slate-300 hover:bg-white hover:shadow-md transition-all text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                        <button onclick="scrollCarousel('knowledge-container', 'right')" class="p-2 rounded-full border border-slate-300 hover:bg-white hover:shadow-md transition-all text-slate-600"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+
+                <!-- Grid Flow Column for 2 rows effect inside a horizontal scroll -->
+                <div id="knowledge-container" class="grid grid-rows-2 grid-flow-col gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scroll-smooth no-scrollbar auto-cols-[300px] md:auto-cols-[380px]">
+                    
+                    <!-- Updated Item 1 -->
+                    <div class="search-item snap-start bg-slate-50 p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-lg transition-all flex flex-col md:flex-row gap-4">
+                         <div class="w-full md:w-32 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                             <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover" alt="Article"/>
+                         </div>
+                         <div class="flex-1">
+                             <div class="flex gap-2 mb-1"><span class="text-[10px] font-bold text-brand bg-blue-50 px-2 py-0.5 rounded">Hướng dẫn</span></div>
+                             <h3 class="search-title text-sm font-bold text-slate-800 mb-1 hover:text-brand cursor-pointer line-clamp-2">Top 5 Flycam cho người mới 2024</h3>
+                             <p class="text-xs text-slate-500 line-clamp-2">Đánh giá chi tiết các dòng drone giá rẻ, dễ bay.</p>
+                         </div>
+                    </div>
+                    <!-- Updated Item 2 -->
+                    <div class="search-item snap-start bg-slate-50 p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-lg transition-all flex flex-col md:flex-row gap-4">
+                         <div class="w-full md:w-32 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                             <img src="https://images.unsplash.com/photo-1506459956404-f56f3458231c?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover" alt="Article"/>
+                         </div>
+                         <div class="flex-1">
+                             <div class="flex gap-2 mb-1"><span class="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded">An toàn</span></div>
+                             <h3 class="search-title text-sm font-bold text-slate-800 mb-1 hover:text-brand cursor-pointer line-clamp-2">Quy định xin phép bay Flycam</h3>
+                             <p class="text-xs text-slate-500 line-clamp-2">Thủ tục giấy tờ cần thiết theo Nghị định 36.</p>
+                         </div>
+                    </div>
+                    <!-- Updated Item 3 -->
+                    <div class="search-item snap-start bg-slate-50 p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-lg transition-all flex flex-col md:flex-row gap-4">
+                         <div class="w-full md:w-32 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                             <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover" alt="Article"/>
+                         </div>
+                         <div class="flex-1">
+                             <div class="flex gap-2 mb-1"><span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded">Mẹo</span></div>
+                             <h3 class="search-title text-sm font-bold text-slate-800 mb-1 hover:text-brand cursor-pointer line-clamp-2">Cách bảo quản Pin Lipo đúng cách</h3>
+                             <p class="text-xs text-slate-500 line-clamp-2">Tránh phồng pin và cháy nổ khi không sử dụng.</p>
+                         </div>
+                    </div>
+                    <!-- Updated Item 4 -->
+                    <div class="search-item snap-start bg-slate-50 p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-lg transition-all flex flex-col md:flex-row gap-4">
+                         <div class="w-full md:w-32 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                             <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover" alt="Article"/>
+                         </div>
+                         <div class="flex-1">
+                             <div class="flex gap-2 mb-1"><span class="text-[10px] font-bold text-brand bg-blue-50 px-2 py-0.5 rounded">Kỹ thuật</span></div>
+                             <h3 class="search-title text-sm font-bold text-slate-800 mb-1 hover:text-brand cursor-pointer line-clamp-2">Setup Betaflight cho Quadcopter</h3>
+                             <p class="text-xs text-slate-500 line-clamp-2">Hướng dẫn tuning PID cơ bản cho drone đua.</p>
+                         </div>
+                    </div>
+                    <!-- Updated Item 5 -->
+                    <div class="search-item snap-start bg-slate-50 p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-lg transition-all flex flex-col md:flex-row gap-4">
+                         <div class="w-full md:w-32 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                             <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover" alt="Article"/>
+                         </div>
+                         <div class="flex-1">
+                             <div class="flex gap-2 mb-1"><span class="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">Review</span></div>
+                             <h3 class="search-title text-sm font-bold text-slate-800 mb-1 hover:text-brand cursor-pointer line-clamp-2">Đánh giá DJI Avata 2 mới nhất</h3>
+                             <p class="text-xs text-slate-500 line-clamp-2">Trải nghiệm bay FPV dễ dàng hơn bao giờ hết.</p>
+                         </div>
+                    </div>
+                    <!-- Updated Item 6 -->
+                    <div class="search-item snap-start bg-slate-50 p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-lg transition-all flex flex-col md:flex-row gap-4">
+                         <div class="w-full md:w-32 h-24 bg-slate-200 rounded-lg overflow-hidden shrink-0">
+                             <img src="https://images.unsplash.com/photo-1518365050014-70fe7232897f?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover" alt="Article"/>
+                         </div>
+                         <div class="flex-1">
+                             <div class="flex gap-2 mb-1"><span class="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">Tin tức</span></div>
+                             <h3 class="search-title text-sm font-bold text-slate-800 mb-1 hover:text-brand cursor-pointer line-clamp-2">DJI bị cấm tại Mỹ? Sự thật là gì</h3>
+                             <p class="text-xs text-slate-500 line-clamp-2">Phân tích tác động của lệnh cấm đến người dùng.</p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Section (Carousel 2 rows x 3 cols) -->
+        <div id="training-section" class="py-20 bg-slate-50 border-t border-slate-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-10 scroll-trigger opacity-0-start" data-animate="animate__fadeInLeft">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+                            <div class="w-2 h-8 bg-brand rounded-full"></div>
+                            Khóa đào tạo
+                        </h2>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="scrollCarousel('training-container', 'left')" class="p-2 rounded-full border border-slate-300 hover:bg-white hover:shadow-md transition-all text-slate-600"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                        <button onclick="scrollCarousel('training-container', 'right')" class="p-2 rounded-full border border-slate-300 hover:bg-white hover:shadow-md transition-all text-slate-600"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+
+                <div id="training-container" class="grid grid-rows-2 grid-flow-col gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scroll-smooth no-scrollbar auto-cols-[300px] md:auto-cols-[380px]">
+                    <!-- Item 1 -->
+                    <div class="search-item snap-start flex border border-slate-200 rounded-xl overflow-hidden hover:border-brand transition-colors bg-white">
+                        <div class="w-2 bg-brand"></div>
+                        <div class="p-4 flex-1">
+                            <h3 class="search-title text-lg font-bold text-slate-800 mb-1 truncate">Huấn luyện bay cơ bản T10</h3>
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                                <span class="flex items-center"><i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 15/10/2024</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> Hà Nội</span>
+                            </div>
+                            <button class="text-xs font-bold text-white bg-brand px-3 py-1.5 rounded hover:bg-blue-700">Đăng ký</button>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="search-item snap-start flex border border-slate-200 rounded-xl overflow-hidden hover:border-brand transition-colors bg-white">
+                        <div class="w-2 bg-blue-400"></div>
+                        <div class="p-4 flex-1">
+                            <h3 class="search-title text-lg font-bold text-slate-800 mb-1 truncate">Nhiếp ảnh trên không T11</h3>
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                                <span class="flex items-center"><i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 05/11/2024</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> TP.HCM</span>
+                            </div>
+                            <button class="text-xs font-bold text-white bg-brand px-3 py-1.5 rounded hover:bg-blue-700">Đăng ký</button>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="search-item snap-start flex border border-slate-200 rounded-xl overflow-hidden hover:border-brand transition-colors bg-white">
+                        <div class="w-2 bg-green-500"></div>
+                        <div class="p-4 flex-1">
+                            <h3 class="search-title text-lg font-bold text-slate-800 mb-1 truncate">Vận hành Agras T40</h3>
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                                <span class="flex items-center"><i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 20/11/2024</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> Đồng Tháp</span>
+                            </div>
+                            <button class="text-xs font-bold text-white bg-brand px-3 py-1.5 rounded hover:bg-blue-700">Đăng ký</button>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="search-item snap-start flex border border-slate-200 rounded-xl overflow-hidden hover:border-brand transition-colors bg-white">
+                        <div class="w-2 bg-purple-500"></div>
+                        <div class="p-4 flex-1">
+                            <h3 class="search-title text-lg font-bold text-slate-800 mb-1 truncate">Dựng bản đồ 3D (Mapping)</h3>
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                                <span class="flex items-center"><i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 10/12/2024</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> Đà Nẵng</span>
+                            </div>
+                            <button class="text-xs font-bold text-white bg-brand px-3 py-1.5 rounded hover:bg-blue-700">Đăng ký</button>
+                        </div>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="search-item snap-start flex border border-slate-200 rounded-xl overflow-hidden hover:border-brand transition-colors bg-white">
+                        <div class="w-2 bg-red-500"></div>
+                        <div class="p-4 flex-1">
+                            <h3 class="search-title text-lg font-bold text-slate-800 mb-1 truncate">Lắp ráp FPV Racing</h3>
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                                <span class="flex items-center"><i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 15/12/2024</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> Hà Nội</span>
+                            </div>
+                            <button class="text-xs font-bold text-white bg-brand px-3 py-1.5 rounded hover:bg-blue-700">Đăng ký</button>
+                        </div>
+                    </div>
+                     <!-- Item 6 -->
+                    <div class="search-item snap-start flex border border-slate-200 rounded-xl overflow-hidden hover:border-brand transition-colors bg-white">
+                        <div class="w-2 bg-orange-500"></div>
+                        <div class="p-4 flex-1">
+                            <h3 class="search-title text-lg font-bold text-slate-800 mb-1 truncate">An toàn bay & Xin phép</h3>
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                                <span class="flex items-center"><i data-lucide="calendar" class="w-3 h-3 mr-1"></i> 22/12/2024</span>
+                                <span class="flex items-center"><i data-lucide="map-pin" class="w-3 h-3 mr-1"></i> Online</span>
+                            </div>
+                            <button class="text-xs font-bold text-white bg-brand px-3 py-1.5 rounded hover:bg-blue-700">Đăng ký</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partners Section (Using Clearbit Logos for stability) -->
+        <div class="py-16 bg-white border-t border-slate-200 scroll-trigger opacity-0-start" data-animate="animate__fadeIn">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-center text-slate-500 text-sm font-semibold uppercase tracking-widest mb-10">Đối tác & Khách hàng tin cậy</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 gap-y-12">
+                    <!-- Using logo.clearbit.com for reliable logo serving. Increased height to h-16/h-20 for visibility. -->
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/dji.com" class="h-16 object-contain" alt="DJI"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/autelrobotics.com" class="h-16 object-contain" alt="Autel"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/google.com" class="h-12 object-contain" alt="Google"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/vinamilk.com.vn" class="h-20 object-contain" alt="Vinamilk"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/viettel.com.vn" class="h-16 object-contain" alt="Viettel"></div>
+                    
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/sony.com" class="h-12 object-contain" alt="Sony"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/gopro.com" class="h-14 object-contain" alt="GoPro"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/ge.com" class="h-16 object-contain" alt="GE"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/intel.com" class="h-14 object-contain" alt="Intel"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/panasonic.com" class="h-12 object-contain" alt="Panasonic"></div>
+                    
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/amazon.com" class="h-14 object-contain" alt="Amazon"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/vtv.vn" class="h-14 object-contain" alt="VTV"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/vnexpress.net" class="h-10 object-contain" alt="VnExpress"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/fpt.com.vn" class="h-14 object-contain" alt="FPT"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/vietnamairlines.com" class="h-14 object-contain" alt="Vietnam Airlines"></div>
+                    
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/canon.com" class="h-10 object-contain" alt="Canon"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/nikon.com" class="h-14 object-contain" alt="Nikon"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/quymhon.com" class="h-14 object-contain" alt="Quy Nhon"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/novaland.com.vn" class="h-14 object-contain" alt="Novaland"></div>
+                    <div class="flex items-center justify-center grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"><img src="https://logo.clearbit.com/sungroup.com.vn" class="h-14 object-contain" alt="Sun Group"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact-section" class="py-20 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10 scroll-trigger opacity-0-start" data-animate="animate__fadeInDown">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Liên hệ với chúng tôi</h2>
+                    <p class="text-slate-500">Để lại thông tin, chúng tôi sẽ gọi lại tư vấn miễn phí trong vòng 24h.</p>
+                </div>
+                <form class="bg-white p-8 rounded-2xl border border-slate-200 shadow-lg scroll-trigger opacity-0-start" data-animate="animate__zoomIn" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Chúng tôi đã nhận được thông tin.');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Họ và tên</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-brand focus:ring-1 focus:ring-brand outline-none bg-slate-50 transition-all hover:border-brand/50" placeholder="Nguyễn Văn A">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Số điện thoại</label>
+                            <input type="tel" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-brand focus:ring-1 focus:ring-brand outline-none bg-slate-50 transition-all hover:border-brand/50" placeholder="0912xxxxxx">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-brand focus:ring-1 focus:ring-brand outline-none bg-slate-50 transition-all hover:border-brand/50" placeholder="example@@gmail.com">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Nội dung cần tư vấn</label>
+                        <textarea class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-brand focus:ring-1 focus:ring-brand outline-none bg-slate-50 h-32 transition-all hover:border-brand/50" placeholder="Tôi muốn tìm hiểu về khóa học bay..."></textarea>
+                    </div>
+                    <button class="w-full bg-brand hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-md transform active:scale-95">
+                        Gửi yêu cầu
+                    </button>
+                </form>
+            </div>
+        </div>
+
+      </div> <!-- End Home View -->
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand border-t border-blue-800 pt-16 pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-white">
+          
+          <!-- Brand -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+               <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                <i data-lucide="plane" class="text-brand w-5 h-5 transform -rotate-45"></i>
+              </div>
+              <span class="text-xl font-bold">TNFlying</span>
+            </div>
+            <p class="text-blue-100 text-sm leading-relaxed">
+              Tiên phong công nghệ Drone tại Việt Nam. Đồng hành cùng bạn trên mọi chuyến bay.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-blue-200 hover:text-white transition-colors hover:animate__animated hover:animate__heartBeat"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+              <a href="#" class="text-blue-200 hover:text-white transition-colors hover:animate__animated hover:animate__heartBeat"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+              <a href="#" class="text-blue-200 hover:text-white transition-colors hover:animate__animated hover:animate__heartBeat"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div>
+            <h3 class="font-bold text-lg mb-4">Khám phá</h3>
+            <ul class="space-y-2 text-sm text-blue-100">
+              <li><a href="#" onclick="scrollToSection('about-section')" class="hover:text-white hover:underline">Về chúng tôi</a></li>
+              <li><a href="#" onclick="scrollToSection('products-section')" class="hover:text-white hover:underline">Sản phẩm mới</a></li>
+              <li><a href="#" onclick="scrollToSection('projects-section')" class="hover:text-white hover:underline">Dự án tiêu biểu</a></li>
+              <li><a href="#" onclick="scrollToSection('training-section')" class="hover:text-white hover:underline">Đào tạo</a></li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h3 class="font-bold text-lg mb-4">Hỗ trợ</h3>
+            <ul class="space-y-2 text-sm text-blue-100">
+              <li><a href="#" class="hover:text-white hover:underline">Chính sách bảo hành</a></li>
+              <li><a href="#" class="hover:text-white hover:underline">Quy định đổi trả</a></li>
+              <li><a href="#" class="hover:text-white hover:underline">Hướng dẫn mua hàng</a></li>
+              <li><a href="#" class="hover:text-white hover:underline">Bảo mật thông tin</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="font-bold text-lg mb-4">Liên hệ</h3>
+            <ul class="space-y-3 text-sm text-blue-100">
+                <li class="flex items-start gap-3">
+                    <i data-lucide="map-pin" class="w-5 h-5 shrink-0"></i>
+                    <span>Tầng 5, Tòa nhà TechHub, Cầu Giấy, Hà Nội</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i data-lucide="phone" class="w-5 h-5 shrink-0"></i>
+                    <span>0987 654 321</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <i data-lucide="mail" class="w-5 h-5 shrink-0"></i>
+                    <span>contact@@skyhorizon.vn</span>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-blue-400/30 pt-8 text-center text-sm text-blue-100">
+          <p>Bản quyền thuộc về TN</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Navigation Logic
+        window.scrollToSection = function(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        window.toggleMobileMenu = function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toggle Search Bar
+        window.toggleSearch = function() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.classList.toggle('hidden');
+            if (!searchBar.classList.contains('hidden')) {
+                document.getElementById('search-input').focus();
+            }
+        }
+
+        // Search Logic
+        window.handleSearch = function(query) {
+            const resultsContainer = document.getElementById('search-results');
+            const term = query.toLowerCase().trim();
+            
+            if (term.length === 0) {
+                resultsContainer.classList.add('hidden');
+                resultsContainer.innerHTML = '';
+                return;
+            }
+
+            // Find searchable items
+            const items = document.querySelectorAll('.search-item');
+            const matches = [];
+
+            items.forEach(item => {
+                const titleEl = item.querySelector('.search-title');
+                if (titleEl) {
+                    const text = titleEl.innerText.toLowerCase();
+                    if (text.includes(term)) {
+                        matches.push({
+                            element: item,
+                            text: titleEl.innerText,
+                            type: item.closest('[id$="-section"]').id.replace('-section', '').toUpperCase()
+                        });
+                    }
+                }
+            });
+
+            // Render Results
+            resultsContainer.innerHTML = '';
+            if (matches.length > 0) {
+                resultsContainer.classList.remove('hidden');
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.className = 'px-4 py-3 border-b border-gray-100 hover:bg-blue-50 cursor-pointer flex justify-between items-center group';
+                    div.innerHTML = `
+                        <span class="font-medium text-slate-700 group-hover:text-brand">${match.text}</span>
+                        <span class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">${match.type}</span>
+                    `;
+                    div.onclick = () => {
+                        match.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        // Highlight effect
+                        match.element.classList.add('ring-4', 'ring-brand/50');
+                        setTimeout(() => match.element.classList.remove('ring-4', 'ring-brand/50'), 2000);
+                        
+                        toggleSearch(); // Close search bar
+                    };
+                    resultsContainer.appendChild(div);
+                });
+            } else {
+                resultsContainer.classList.remove('hidden');
+                resultsContainer.innerHTML = '<div class="px-4 py-3 text-gray-500 text-sm">Không tìm thấy kết quả phù hợp.</div>';
+            }
+        }
+
+        // Carousel Scroll Logic
+        window.scrollCarousel = function(containerId, direction) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                const scrollAmount = 320; 
+                if (direction === 'left') {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }
+        }
+        
+        // Counter Animation Logic
+        function startCounters() {
+            const counters = document.querySelectorAll('.counter-value');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // Animation duration in ms
+                const increment = target / (duration / 16); // 60fps
+                
+                let current = 0;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // Scroll Animation Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-animate');
+                        entry.target.classList.add('animate__animated', animation);
+                        entry.target.classList.remove('opacity-0-start');
+                        
+                        // Check if this is the stats section to trigger counter
+                        if (entry.target.id === 'stats-section') {
+                            startCounters();
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-trigger').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+    @RenderBody()
+  </body>
+</html>

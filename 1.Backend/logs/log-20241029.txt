@@ -1,1 +1,0 @@
-2024-10-29 15:36:49.712 +07:00 [Warning] Query: '"(from Country <generated>_3 in DbSet<Country> select [<generated>_3]).Skip(__p_0).Take(__p_1)"' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results.

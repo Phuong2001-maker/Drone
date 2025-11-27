@@ -14,6 +14,7 @@
 [Rr]elease/
 [Dd]ebug/
 [Ll]og/
+[Ll]ogs/
 
 # IDE settings
 .vscode/
@@ -45,3 +46,8 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+
+# VS cache dbs
+.vs/
+*.db-shm
+*.db-wal

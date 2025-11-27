@@ -1,3 +1,8 @@
 is_global = true
 build_property.RootNamespace = PT.Domain
-build_property.ProjectDir = D:\Project\T03\eKYC_WEB\2.Domain\
+build_property.ProjectDir = C:\Users\TNDESKTOP0001\Desktop\Drone\2.Domain\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

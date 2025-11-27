@@ -1,0 +1,242 @@
+﻿@addTagHelper *, PT.UI
+@using Microsoft.AspNetCore.Mvc.Localization
+@using PT.Domain.Model;
+@inject IViewLocalizer  Localizer
+@using System.Linq.Expressions;
+@inject ICountryRepository _iCountryRepository;
+@{
+
+    Layout = "~/Views/Shared/_Home.cshtml";
+    string language = PT.Base.CultureHelper.GetCurrentCulture.Id;
+
+    Expression<Func<Category, Category>> categorySelect = x => new Category { Banner = x.Banner, Language = x.Language, Delete = x.Delete, Status = x.Status, Id = x.Id, IsHome = x.IsHome, Summary = x.Summary, Link = x.Link, Name = x.Name, Order = x.Order, Type = x.Type, Banner2 = x.Banner2 };
+    Func<IQueryable<Category>, IOrderedQueryable<Category>> categoryOrderBy = x => x.OrderBy(m => m.Order);
+    Expression<Func<Category, bool>> predicate = x => x.Type == CategoryType.CategoryService && x.IsHome && x.Status && !x.Delete && x.Language == language;
+
+    var listData = await _iCountryRepository.SearchAsync(true, 0, 99999);
+}
+
+
+
+<div class="page-content">
+    <!--section slider-->
+    <div class="section mt-0" style="position:relative;">
+
+        @if (language == "vi")
+        {
+            <vc:view-module id="2" type="PhotoSlide"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="4" type="PhotoSlide"></vc:view-module>
+        }
+
+
+    </div>
+
+    <!--//section slider-->
+
+
+    <!--section GiaTriMangLai-->
+    <div class="section ">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1054" type="StaticInformation"></vc:view-module>
+
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1066" type="StaticInformation"></vc:view-module>
+
+        }
+    </div>
+    <!--//section GiaTriMangLai-->
+    <!--section GiaiPhap-->
+        <div class="section pdt30">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1055" type="StaticInformation"></vc:view-module>
+
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1067" type="StaticInformation"></vc:view-module>
+        }
+    </div>
+    <!--//section GiaiPhap-->
+    <!--section TinhNang-->
+    <div class="section  pdb15" >
+        @if (language == "vi")
+        {
+            <vc:view-module id="1056" type="StaticInformation"></vc:view-module>
+
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1068" type="StaticInformation"></vc:view-module>
+
+        }
+    </div>
+    <!--//section TinhNang-->
+    <!--section Linhvuckinhdoanh-->
+    <div class="section pdt30">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1083" type="StaticInformation"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1084" type="StaticInformation"></vc:view-module>
+        }
+    </div>
+    <!--//section Linhvuckinhdoanh-->
+    <!--section Taisaochonchungtoi-->
+    <div class="section pdt30">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1085" type="StaticInformation"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1086" type="StaticInformation"></vc:view-module>
+        }
+    </div>
+    <!--//section Taisaochonchungtoi-->
+    <!--section Chiakhoatuonglai-->
+    <div class="section pdt30">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1088" type="StaticInformation"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1087" type="StaticInformation"></vc:view-module>
+        }
+    </div>
+    <!--//section Chiakhoatuonglai-->
+    <!--section Ungdung-->
+    <div class="section pdt30">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1058" type="StaticInformation"></vc:view-module>
+
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1070" type="StaticInformation"></vc:view-module>
+
+        }
+    </div>
+
+    <!--//section Chiakhoatuonglai-->
+</div>
+
+@section Scripts
+{
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function showField(fieldNumber) {
+                const fields = document.querySelectorAll('.business-field-1, .business-field-2');
+                fields.forEach(field => {
+                    field.style.display = 'none';
+                });
+                document.querySelectorAll(`#business-field-${fieldNumber}, #business-field-${fieldNumber}-img`).forEach(field => {
+                    field.style.display = 'block';
+                });
+                document.querySelectorAll('.form-check').forEach(check => {
+                    check.classList.remove('active');
+                });
+                document.getElementById(`formCheck${fieldNumber}`).classList.add('active');
+            }
+
+            document.getElementById('flexRadioDefault1').addEventListener('change', function () {
+                if (this.checked) {
+                    showField(1);
+                }
+            });
+
+            document.getElementById('flexRadioDefault2').addEventListener('change', function () {
+                if (this.checked) {
+                    showField(2);
+                }
+            });
+
+            showField(1);
+        });
+    </script>
+    <script>
+      var arrayList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(listData));
+        $('#mySelect3').select2();
+        $('#mySelect3').on("change", function () {
+
+            if ($('#mySelect3').val() == "") {
+                $("[form-book-2] #PhoneCode").val("");
+            }
+            else {
+                var dl = arrayList.find(x => x.Id == $('#mySelect3').val());
+                if (dl != null) {
+                    $("[form-book-2] #PhoneCode").val(dl.PhoneCode);
+                }
+            }
+        });
+    </script>
+    <script>
+        initFormBook();
+        initDatetime("@language");
+        $(document).on("click", "[btn-send-contact-2]", function () {
+            initCapcha(function () {
+            var form = $("[form-contact-book-2]");
+            if (form.valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.attr("action"),
+                    data: form.serialize(),
+                    headers:
+                    {
+                        "RequestVerificationToken": form.find("input[name='__RequestVerificationToken']").val()
+                    },
+                    success: function (rs) {
+                        $("[name='FullName']").val("");
+                        $("[name='Email']").val("");
+                        $("[name='Phone']").val("");
+                        $("[name='Content']").val("");
+                        $("[name='Age']").val("");
+
+                        if (rs.output == 1) {
+
+                            swal({
+                                    title: "@SR["MsgSuccess"]",
+                                    text: "",
+                                    type: "success",
+                                    confirmButtonText: "@SR["Close"]!"
+                            });
+
+                        }
+                        else {
+
+                            swal({
+                                title: rs.message,
+                                    text: "",
+                                    type: "warning",
+                                    confirmButtonText: "@SR["Close"]!"
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert("Vui lòng F5 trình duyệt rồi thử lại!");
+                    },
+                    complete: function (jqxhr, txt_status) {
+                        if (jqxhr.status == 502) {
+                            alert("Vui lòng F5 trình duyệt rồi thử lại!");
+                        }
+                    }
+                });
+            }
+
+            });
+
+        });
+
+    </script>
+}

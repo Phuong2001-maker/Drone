@@ -1,0 +1,49 @@
+﻿@model PT.Domain.Model.BaseSettings
+@addTagHelper *, Sakura.AspNetCore.Mvc.PagedList
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, PT.UI
+@{
+    Layout = null;
+}
+<form form-edit>
+    @Html.AntiForgeryToken()
+    <div role="tabpanel" class="tab-pane fade in active" id="tab6">
+        <div class="form-group">
+            <label class="form-label">String To Hash</label>
+            <div class="controls">
+                <textarea rows="4" id="areaStringToHash" cols="50" class="form-control input-sm form-control-t"></textarea>
+            </div>
+            <label class="form-label">Result</label>
+            <div class="controls">
+                <textarea rows="4" id="areaHashResult" cols="50" class="form-control input-sm form-control-t"></textarea>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12 mb-0">
+                <div class="divbtnform">
+                    <button onclick="sha256()" data-loading-text="<i class='material-icons icon-spin'>autorenew</i> <span>Sha256</span>" type="button" class="btn  btn-p-t  btn-icon bg-indigo waves-effect"><i class="material-icons">system_update_alt</i> <span>Sha256</span></button>
+                    <button onclick="sha384()" data-loading-text="<i class='material-icons icon-spin'>autorenew</i> <span>Sha384</span>" type="button" class="btn  btn-primary btn-icon bg-indigo waves-effect"><i class="material-icons">system_update_alt</i> <span>Sha384</span></button>
+                    <button onclick="sha512()" data-loading-text="<i class='material-icons icon-spin'>autorenew</i> <span>Sha512</span>" type="button" class="btn  btn-danger  btn-icon bg-indigo waves-effect"><i class="material-icons">system_update_alt</i> <span>Sha512</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    function sha256() {
+        $.post("@Url.Action("ComputeSha256")?raw=" + $("#areaStringToHash").val(), function (data) {
+            $("#areaHashResult").val(data);
+           
+        })
+    }
+    function sha384() {
+        $.post("@Url.Action("ComputeSha384")?raw=" + $("#areaStringToHash").val(), function (data) {
+            $("#areaHashResult").val(data);
+        })
+    }
+    function sha512() {
+        $.post("@Url.Action("ComputeSha512")?raw=" + $("#areaStringToHash").val(), function (data) {
+            $("#areaHashResult").val(data);
+        })
+    }
+</script>

@@ -1,0 +1,147 @@
+﻿@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+    string language = PT.Base.CultureHelper.GetCurrentCulture.Id;
+}
+
+<div class="page-content">
+    <div class="mt-0">
+        <div class="account-container main-bg ">
+            <div class="container">
+                <div class="row">
+                    @if (language=="vi")
+                    {
+                    <div class="main-box account-box text-center">
+                        <div class="pdt15">
+                            <img src="/Data/2023/logoEKYC.png" alt="Đăng ký">
+                        </div>
+                        <div class="pdt15"> <h2 class="h1 font-ten ">Đăng ký</h2></div>
+                        <div class="pdt15">
+                            <div class="h-sub text-center">  Chào mừng bạn đến với hành trình định danh  <br />điện tử Trí Nam eKYC</div>
+                        </div>
+                        <div class="form-input text-left">
+
+                            <div style="position: relative;">
+                                <div class="label">
+                                    Họ và tên <span class="required">*</span>
+                                    <input type="text" class="form-control" placeholder="Nhập họ và tên">
+                                </div>
+                            </div>
+                            <div style="position: relative;" class="pdt15">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="label">
+                                            Số điện thoại <span class="required">*</span>
+                                            <input type="text" class="form-control" placeholder="Nhập số điện thoại">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="label">
+                                            Email <span class="required">*</span>
+                                            <input type="text" class="form-control" placeholder="Nhập email">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="position: relative;" class="pdt15">
+                                <div class="label">
+                                    Mật khẩu <span class="required">*</span>
+                                    <input type="text" class="form-control" placeholder="Nhập mật khẩu">
+                                </div>
+                            </div>
+                            <div style="position: relative;" class="pdt15">
+                                <div class="label">
+                                    Công ty<span class="required">*</span>
+                                    <input type="text" class="form-control" placeholder="Nhập công ty">
+                                </div>
+                            </div>
+                            <div style="position: relative;" class="pdt15">
+                                <div class="label">
+                                    Lĩnh vực<span class="required">*</span>
+                                    <input type="text" class="form-control" placeholder="Chọn lĩnh vực hoạt động">
+                                </div>
+                            </div>
+                            <div style="position: relative;" class="pdt15">
+                                <input type="checkbox">&nbsp;Tôi đã đọc và đồng ý với <a href="#">Điều khoản sử dụng</a>  và <br /> <a href="#">Chính sách bảo mật </a> của Trí Nam eKYC
+                            </div>
+                            <div style="position: relative;" class="pdt15 text-center">
+                                <button btn-send-contact="" type="button" class="btn"><i class="icon-right-arrow"></i><span>Đăng ký</span><i class="icon-right-arrow"></i></button>
+                            </div>
+                            <div style="position: relative;" class="pdt15 text-center">
+                               Đã có tài khoản? <a href="#"> Đăng nhập</a>  
+                            </div>
+                        </div>
+                        </div>
+                    }
+                    else if (language == "en")
+                    {
+                        <div class="main-box account-box text-center">
+                            <div class="pdt15">
+                                <img src="/Data/2023/logoEKYC.png" alt="Register">
+                            </div>
+                            <div class="pdt15"> <h2 class="h1 font-ten ">Register</h2></div>
+                            <div class="pdt15">
+                                <div class="h-sub text-center">  Welcome to the Tri Nam eKYC electronic identity journey</div>
+                            </div>
+                            <div class="form-input text-left">
+
+                                <div style="position: relative;">
+                                    <div class="label">
+                                        Full name <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Enter full name">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="label">
+                                                Phone number <span class="required">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter phone numbers">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="label">
+                                                Email <span class="required">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Password <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Enter password">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Company <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Enter company">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Fields<span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Choose field">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <input type="checkbox">&nbsp;I have read and agree with <a href="#">Terms and Conditions of Use </a> and <br /> <a href="#"> Privacy Policy  </a> of Tri Nam eKYC
+                                </div>
+                                <div style="position: relative;" class="pdt15 text-center">
+                                    <button btn-send-contact="" type="button" class="btn"><i class="icon-right-arrow"></i><span>Đăng ký</span><i class="icon-right-arrow"></i></button>
+                                </div>
+                                <div style="position: relative;" class="pdt15 text-center">
+                                    Have an account? <a href="#"> Log in</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model PT.Domain.Model.Category
+@addTagHelper *, PT.UI
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer  Localizer
+@inject ICategoryRepository _iCategoryRepository;
+@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+    string language = PT.Base.CultureHelper.GetCurrentCulture.Id;
+    var listCategory = await _iCategoryRepository.CurrentTreeChildrent(Model.ParentId,language,CategoryType.CategoryService);
+}
+<div class="page-content">
+    <div class="section mt-0">
+        <div class="breadcrumbs-wrap">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="/@Model.Language">@Localizer["Home"].Value</a>
+                    @foreach (var item in listCategory)
+                    {
+                        <a href="@PT.Shared.Functions.FormatUrl(item.Language,item?.Link?.Slug)">@item.Name</a>
+                    }
+                    <span>@Model.Name</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section page-content-first">
+        <div class="container">
+            <div class="text-center mb-2  mb-md-3 mb-lg-4">
+                <h1 class="bigTitle">@Model.Name</h1>
+                <div class="h-decor"></div>
+                <div class="text-center mt-4">
+                    <p>
+                        @Html.Raw(Model.Summary)
+                    </p>
+                </div>
+                <div class="content-nd">
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row col-equalH">
+                @foreach (var item in Model.PageBlog.Data)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="service-card-photo">
+                                <a href="@PT.Shared.Functions.FormatUrl(item.Language,item.Link?.Slug)"><img onerror="this.onerror=null;this.src = '/Content/Home/images/No_Image_Available.jpg';" src="@(item.Banner??" ")" class="img-fluid" alt="@item.Name"></a>
+                            </div>
+                            <h5 class="service-card-name"><a href="@PT.Shared.Functions.FormatUrl(item.Language,item.Link?.Slug)">@item.Name</a></h5>
+                            <p>@Html.Raw(item.Summary)</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div style="height:50px;"></div>
+        </div>
+    </div>
+</div>
+@if (language == "vi")
+{
+    <vc:view-module id="3" type="StaticInformation"></vc:view-module>
+}
+else if (language == "en")
+{
+    <vc:view-module id="1012" type="StaticInformation"></vc:view-module>
+}

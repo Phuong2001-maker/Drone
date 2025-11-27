@@ -1,0 +1,15 @@
+﻿@model ComponentModel<ContentPage>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer  Localizer
+@{
+    Layout = null;
+}
+@foreach (var item in Model.Items)
+{
+    <div class="footer-post d-flex" style="margin-top:5px;">
+        <div class="footer-post-text">
+            <div class="footer-post-title">
+                <h5 class="titleNews"><a href="@PT.Shared.Functions.FormatUrl(item.Language,item.Link?.Slug)">&#8226; &nbsp; @item.Name</a></h5>
+            </div>
+        </div>
+    </div>
+}

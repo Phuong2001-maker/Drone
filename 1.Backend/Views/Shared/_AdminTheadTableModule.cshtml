@@ -1,0 +1,5 @@
+﻿@inject Microsoft.Extensions.Options.IOptions<BaseSettings> _baseSettings;
+@if (_baseSettings.Value.MultipleLanguage)
+{
+    <th colspan="2" style="width:160px;" class="text-center">Ánh xạ phiên bản</th>
+}

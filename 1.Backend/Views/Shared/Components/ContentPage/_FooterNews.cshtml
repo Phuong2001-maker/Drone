@@ -1,0 +1,12 @@
+﻿@model ComponentModel<ContentPage>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer  Localizer
+@{
+    Layout = null;
+}
+<ul class="icn-list-lg list-menu">
+    @foreach (var item in Model.Items)
+    {
+        <li><a style=" color: #333;" title="@item.Name" href="@PT.Shared.Functions.FormatUrl(item.Language,item.Link?.Slug)">@item.Name</a></li>
+    }
+</ul>
+

@@ -1,0 +1,117 @@
+﻿@addTagHelper *, PT.UI
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer  Localizer
+@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+    string language = PT.Base.CultureHelper.GetCurrentCulture.Id;
+
+}
+
+<div class="page-content">
+    <div class="section mt-0">
+        <div class="breadcrumbs-wrap">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <a href="/">@Localizer["Home"].Value</a>
+                    <span>@Localizer["About"].Value</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-info">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1016" type="StaticInformation"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1017" type="StaticInformation"></vc:view-module>
+        }
+    </div>
+   
+<div class="cssThuNgo">
+    
+
+    @if (language == "vi")
+        {
+            <vc:view-module id="1036" type="StaticInformation"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1037" type="StaticInformation"></vc:view-module>
+        }
+</div>
+
+
+    <div class="cssAbout">
+        @if (language == "vi")
+        {
+            <vc:view-module id="1032" type="StaticInformation"></vc:view-module>
+        }
+        else if (language == "en")
+        {
+            <vc:view-module id="1033" type="StaticInformation"></vc:view-module>
+        }
+    </div>
+
+
+    @if (language == "vi")
+    {
+
+        <vc:view-module id="1018" type="StaticInformation"></vc:view-module>
+    }
+    else if (language == "en")
+    {
+        <vc:view-module id="1019" type="StaticInformation"></vc:view-module>
+    }
+
+    <!--//section-->
+    <!--section-->
+    @if (language == "vi")
+    {
+        <vc:view-module id="1020" type="StaticInformation"></vc:view-module>
+    }
+    else if (language == "en")
+    {
+        <vc:view-module id="1021" type="StaticInformation"></vc:view-module>
+    }
+    @if (language == "vi")
+    {
+        <vc:view-module id="1022" type="StaticInformation"></vc:view-module>
+    }
+    else if (language == "en")
+    {
+        <vc:view-module id="1023" type="StaticInformation"></vc:view-module>
+    }
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+
+                    @if (language == "vi")
+                    {
+                        <vc:view-module id="1024" type="StaticInformation"></vc:view-module>
+                    }
+                    else if (language == "en")
+                    {
+                        <vc:view-module id="1025" type="StaticInformation"></vc:view-module>
+                    }
+
+                </div>
+                <div class="col-lg-8 mt-4 mt-lg-0">
+                    @if (language == "vi")
+                    {
+                        <vc:view-module id="8" type="PhotoSlide"></vc:view-module>
+                    }
+                    else if (language == "en")
+                    {
+                        <vc:view-module id="9" type="PhotoSlide"></vc:view-module>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height:50px;"></div>
+</div>

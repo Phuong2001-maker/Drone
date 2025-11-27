@@ -1,0 +1,277 @@
+﻿@using PT.Domain.Model;
+@addTagHelper *, PT.UI
+@inject Microsoft.Extensions.Options.IOptions<List<WebsiteInfoSettings>> websiteInfoSettings;
+@inject Microsoft.Extensions.Options.IOptions<List<SeoSettings>> seoSettings;
+@inject Microsoft.Extensions.Options.IOptions<BindContentSettings> bindContentSettings;
+@inject Microsoft.Extensions.Options.IOptions<AuthorizeSettings> _authorizeSettings;
+@inject Microsoft.Extensions.Options.IOptions<BaseSettings> _baseSettings;
+@inject IViewLocalizer  Localizer
+
+@{
+    string domain = Context.Request.Host.ToString();
+    string language = PT.Base.CultureHelper.GetCurrentCulture.Id;
+    var listLanguage = PT.Shared.ListData.ListLanguage;
+    var dlLanguage = listLanguage.FirstOrDefault(x => x.Id == language);
+
+    var homeModel = new HomeModel
+    {
+        Domain = domain,
+        SeoSettings = seoSettings.Value.FirstOrDefault(x => x.Id == language) ?? new SeoSettings(),
+        WebsiteInfoSettings = websiteInfoSettings.Value.FirstOrDefault(x => x.Id == language) ?? new WebsiteInfoSettings()
+    };
+    var currentType = PT.Base.CookieExtensions.Get("CurrentPrice");
+
+    var linkData = new Link();
+    if (ViewData["linkData"] != null)
+    {
+        linkData = (Link)ViewData["linkData"];
+    }
+
+    var req = Context.Request;
+    string path = req.Path.ToString();
+
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+   
+
+}
+<!DOCTYPE html>
+<html lang="@language">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <partial name="_HomeHead" model="@(new Tuple<HomeModel,Link>(homeModel,linkData))" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400&display=swap" rel="stylesheet">
+    <link asp-append-version="true" href="~/Content/Home/site.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin/plugins/select2/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .sweet-alert {
+            z-index: 99;
+        }
+
+        .header-search:hover .buttonshowSearch {
+            display: block;
+        }
+    </style>
+
+    @Html.Raw(bindContentSettings.Value.Head)
+
+    @if (language == "vi")
+    {
+        <vc:view-module id="1046" type="StaticInformation"></vc:view-module>
+        <link rel="alternate" href="/" hreflang="vi-vn">
+    }
+    else
+    {
+        <vc:view-module id="1047" type="StaticInformation"></vc:view-module>
+        <link rel="alternate" href="/en" hreflang="en">
+    }
+
+    @if (controllerName == "ContactHome" && actionName == "Contact")
+    {
+        @if (language == "vi")
+        {
+            <vc:view-module id="1048" type="StaticInformation"></vc:view-module>
+        }
+        else
+        {
+            <vc:view-module id="1049" type="StaticInformation"></vc:view-module>
+        }
+    }
+    @if (controllerName == "Home" && (actionName == "About" || actionName == "Clinic1" || actionName == "Clinic2"))
+    {
+        @if (language == "vi")
+        {
+            <vc:view-module id="1050" type="StaticInformation"></vc:view-module>
+        }
+        else
+        {
+            <vc:view-module id="1051" type="StaticInformation"></vc:view-module>
+        }
+    }
+
+</head>
+<body class="shop-page">
+    <header class="header">
+        <div class="header-quickLinks js-header-quickLinks d-lg-none">
+            <div class="quickLinks-top js-quickLinks-top"></div>
+            <div class="js-quickLinks-wrap-m">
+            </div>
+        </div>
+        <div class="header-content">
+            <div class="container">
+                <div class="row align-items-lg-center">
+                    <button class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarNavDropdown">
+                        <span class="icon-menu"></span>
+                    </button>
+                    <div class="col-lg-auto col-lg-2 d-flex align-items-lg-center">
+                        <a href="/@language" class="header-logo"><img src="@homeModel.WebsiteInfoSettings.Logo" alt="@(language=="vi"?"Rose Dental Hồ Chí Minh":"Rose Dental Ho Chi Minh")" class="img-fluid"></a>
+                    </div>
+                    <div class="col-lg ml-auto header-nav-wrap">
+                        @if (language == "vi")
+                        {
+                            <vc:view-module id="1" type="Menu"></vc:view-module>
+                        }
+                        else if (language == "en")
+                        {
+                            <vc:view-module id="33" type="Menu"></vc:view-module>
+                        }
+                        <div class="func-user ">
+                            @if (language == "en")
+                            {
+                                <a class="btn-login" href="@SR["LoginExternal"]">Log in</a>
+                                <a class="btn-register hidden-xs" href="@SR["RegisterExternal"]">Sign up</a>
+                            }
+                            else if (language == "vi")
+                            {
+
+                                <a class="btn-login" href="@SR["LoginExternal"]">Đăng nhập</a>
+                                <a class="btn-register hidden-xs" href="@SR["RegisterExternal"]">Đăng ký</a>
+                            }
+                        </div>
+                        <div class="canlangmini dropdown dropleft">
+                           
+                            @foreach (var item in listLanguage)
+                            {
+                                @if (language == item.Id)
+                                {
+                                    <a class="dropdown-toggle active" data-toggle="dropdown" title="@item.Name2" rel="nofollow" href="@(language==item.Id?$"/Home/ChangeLanguage?language={item.Id}&linkId={linkData.Id}":$"/Home/ChangeLanguage?language={item.Id}&linkId={linkData.Id}")"><img width="24" height="24" src="@item.Icon2">  </a>
+                                    break;
+                                }
+                            }
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        
+                            @foreach (var item in listLanguage)
+                            {
+                                    <a class="dropdown-item @(item.Id==language?"active":"") " title="@item.Name2" rel="nofollow" href="@(language==item.Id?$"/Home/ChangeLanguage?language={item.Id}&linkId={linkData.Id}":$"/Home/ChangeLanguage?language={item.Id}&linkId={linkData.Id}")"><img width="24" height="24" src="@item.Icon2">&nbsp;@item.Name2</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </header>
+    <!--//header-->
+    @RenderBody()
+    <div class="footer-new">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 footer-left">
+                    @if (language == "vi")
+                    {
+                        <vc:view-module id="1091" type="StaticInformation"></vc:view-module>
+                    }
+                    else if (language == "en")
+                    {
+                        <vc:view-module id="1092" type="StaticInformation"></vc:view-module>
+                    }
+                </div>
+                <div class="col-md-3 col-xs-6  footer-middle">
+                    @if (language == "vi")
+                    {
+                        <vc:view-module id="1093" type="StaticInformation"></vc:view-module>
+                    }
+                    else if (language == "en")
+                    {
+                        <vc:view-module id="1094" type="StaticInformation"></vc:view-module>
+                    }
+                </div>
+                <div class="col-md-2 col-xs-6 footer-right">
+                    @if (language == "vi")
+                    {
+                        <vc:view-module id="1095" type="StaticInformation"></vc:view-module>
+                    }
+                    else if (language == "en")
+                    {
+                        <vc:view-module id="1096" type="StaticInformation"></vc:view-module>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @Html.Raw(bindContentSettings.Value.Body)
+</body>
+</html><!-- Vendors -->
+
+<script src="/Content/Home/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="/Content/Home/vendor/jquery-migrate/jquery-migrate-3.0.1.min.js"></script>
+<script asp-append-version="true" src="~/Content/Home/site.min.js"></script>
+<script asp-append-version="true" src="~/Content/Admin/js/script.home.js"></script>
+<link href="~/Content/Admin/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<script src="~/Content/Admin/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Content/Admin/js/cookie.js"></script>
+<script src="~/Content/Admin/plugins/select2/select2.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=@_authorizeSettings.Value.CapChaDataSitekey"></script>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+
+<script>
+    initDatetime("@language");
+    // $(".datetimepicker").datetimepicker();
+    function initCapcha(callBack) {
+        setTimeout(function () {
+          grecaptcha.ready(function () {
+              grecaptcha.execute('@_authorizeSettings.Value.CapChaDataSitekey', { action: 'submit' }).then(function (token) {
+                $("#Capcha").val(token);
+                if (callBack != null) {
+                    callBack();
+                }
+             });
+        }, 500);
+        });
+    }
+    function initFormBook() {
+        var $form = $("[form-contact-book-2]");
+
+        try {
+            // Unbind existing validation
+            $form.unbind();
+            $form.data("validator", null);
+            // Check document for changes
+            $.validator.unobtrusive.parse(document);
+            // Re add validation with changes
+            $form.validate($form.data("unobtrusiveValidation").options);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    function loadSDKFacebook() {
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '@_baseSettings.Value.ClientIdFaceBook',
+                xfbml: true,
+                version: 'v2.10'
+            });
+            FB.AppEvents.logPageView();
+        };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+
+</script>
+
+@Html.Raw(bindContentSettings.Value.Footer)
+@RenderSection("Scripts", required: false)
+<partial name="_SettingHome" />
+<div class="modal modal-form fade" id="modalBookingForm" style="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<partial name="_AdvertisingHomepage" />

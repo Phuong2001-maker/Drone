@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+    string language = PT.Base.CultureHelper.GetCurrentCulture.Id;
+}
+
+<div class="page-content">
+    <div class="mt-0">
+        <div class="account-container main-bg ">
+            <div class="container">
+                <div class="row">
+                    
+                    @if (language == "vi")
+                    {
+                        <div class="main-box account-box text-center">
+                            <div class="pdt15">
+                                <img src="/Data/2023/logoEKYC.png" alt="Đăng ký">
+                            </div>
+                            <div class="pdt15"> <h2 class="h1 font-ten ">Đăng nhập</h2></div>
+                            <div class="pdt15">
+                                <div class="h-sub text-center">  Chào mừng bạn đến với hành trình định danh  <br />điện tử Trí Nam eKYC</div>
+                            </div>
+                            <div class="form-input text-left">
+
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Email <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Nhập email">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Mật khẩu <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Nhập mật khẩu">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15 text-center">
+                                    <button btn-send-contact="" type="button" class="btn"><i class="icon-right-arrow"></i><span>Đăng nhập</span><i class="icon-right-arrow"></i></button>
+                                </div>
+                                <div style="position: relative;" class="pdt15 text-center">
+                                    Bạn chưa có tài khoản? <a href="#"> Đăng ký</a>  
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (language == "en")
+                    {
+                        <div class="main-box account-box text-center">
+                            <div class="pdt15">
+                                <img src="/Data/2023/logoEKYC.png" alt="Đăng ký">
+                            </div>
+                            <div class="pdt15"> <h2 class="h1 font-ten ">Log in</h2></div>
+                            <div class="pdt15">
+                                <div class="h-sub text-center"> Welcome to the Tri Nam eKYC electronic identity journey</div>
+                            </div>
+                            <div class="form-input text-left">
+
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Email <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Enter email">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15">
+                                    <div class="label">
+                                        Password <span class="required">*</span>
+                                        <input type="text" class="form-control" placeholder="Enter password">
+                                    </div>
+                                </div>
+                                <div style="position: relative;" class="pdt15 text-center">
+                                    <button btn-send-contact="" type="button" class="btn"><i class="icon-right-arrow"></i><span>Sign in</span><i class="icon-right-arrow"></i></button>
+                                </div>
+                                <div style="position: relative;" class="pdt15 text-center">
+                                    Don't have a account? <a href="#"> Sign up</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

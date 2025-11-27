@@ -1,0 +1,298 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Project\\T03\\eKYC_WEB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\areas\\base\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\areas\\base\\controllers\\settingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\areas\\manager\\controllers\\menumanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\areas\\manager\\controllers\\menumanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\views\\shared\\_home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\views\\shared\\_home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\wwwroot\\module\\advertisingbanner_10.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\wwwroot\\module\\advertisingbanner_10.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\areas\\manager\\views\\menumanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\areas\\manager\\views\\menumanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\areas\\manager\\views\\menumanager\\createitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\areas\\manager\\views\\menumanager\\createitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|d:\\project\\t03\\ekyc_web\\1.backend\\areas\\manager\\views\\blogmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{05AE0F73-B514-447E-91F2-AE56098B8841}|1.Backend\\PT.UI.csproj|solutionrelative:1.backend\\areas\\manager\\views\\blogmanager\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 41,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:144:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:145:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:146:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:147:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:148:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:149:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:150:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:151:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:152:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:153:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:154:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:155:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:156:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:157:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:158:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:159:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:160:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:161:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:162:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:163:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:164:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:165:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SettingsController.cs",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Base\\Controllers\\SettingsController.cs",
+              "RelativeDocumentMoniker": "1.Backend\\Areas\\Base\\Controllers\\SettingsController.cs",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Base\\Controllers\\SettingsController.cs",
+              "RelativeToolTip": "1.Backend\\Areas\\Base\\Controllers\\SettingsController.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAxwCEAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T07:54:25.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Home.cshtml",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Views\\Shared\\_Home.cshtml",
+              "RelativeDocumentMoniker": "1.Backend\\Views\\Shared\\_Home.cshtml",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Views\\Shared\\_Home.cshtml",
+              "RelativeToolTip": "1.Backend\\Views\\Shared\\_Home.cshtml",
+              "ViewState": "AQIAAI0AAAAAAAAAAAAAALAAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-29T04:47:20.553Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdvertisingBanner_10.html",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\wwwroot\\Module\\AdvertisingBanner_10.html",
+              "RelativeDocumentMoniker": "1.Backend\\wwwroot\\Module\\AdvertisingBanner_10.html",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\wwwroot\\Module\\AdvertisingBanner_10.html",
+              "RelativeToolTip": "1.Backend\\wwwroot\\Module\\AdvertisingBanner_10.html",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-10-29T04:45:56.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MenuManagerController.cs",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Controllers\\MenuManagerController.cs",
+              "RelativeDocumentMoniker": "1.Backend\\Areas\\Manager\\Controllers\\MenuManagerController.cs",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Controllers\\MenuManagerController.cs",
+              "RelativeToolTip": "1.Backend\\Areas\\Manager\\Controllers\\MenuManagerController.cs",
+              "ViewState": "AQIAAGAAAAAAAAAAAAAiwEQCAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T04:34:04.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreateItem.cshtml",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Views\\MenuManager\\CreateItem.cshtml",
+              "RelativeDocumentMoniker": "1.Backend\\Areas\\Manager\\Views\\MenuManager\\CreateItem.cshtml",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Views\\MenuManager\\CreateItem.cshtml",
+              "RelativeToolTip": "1.Backend\\Areas\\Manager\\Views\\MenuManager\\CreateItem.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-29T04:33:51.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Views\\MenuManager\\Create.cshtml",
+              "RelativeDocumentMoniker": "1.Backend\\Areas\\Manager\\Views\\MenuManager\\Create.cshtml",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Views\\MenuManager\\Create.cshtml",
+              "RelativeToolTip": "1.Backend\\Areas\\Manager\\Views\\MenuManager\\Create.cshtml",
+              "ViewState": "AQIAACQAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-29T04:33:48.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Views\\BlogManager\\Create.cshtml",
+              "RelativeDocumentMoniker": "1.Backend\\Areas\\Manager\\Views\\BlogManager\\Create.cshtml",
+              "ToolTip": "D:\\Project\\T03\\eKYC_WEB\\1.Backend\\Areas\\Manager\\Views\\BlogManager\\Create.cshtml",
+              "RelativeToolTip": "1.Backend\\Areas\\Manager\\Views\\BlogManager\\Create.cshtml",
+              "ViewState": "AQIAAIQAAAAAAAAAAADwv3kAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-29T04:33:19.986Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

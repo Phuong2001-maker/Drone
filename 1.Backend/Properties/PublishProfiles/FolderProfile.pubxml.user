@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Project\T03\eKYC_WEB\1.Backend\bin\Release\netcoreapp2.2\publish\</_PublishTargetUrl>
+    <History>True|2024-08-22T07:20:24.8819343Z||;True|2024-08-16T11:16:58.3114178+07:00||;True|2024-08-16T11:15:35.5069008+07:00||;True|2024-08-15T16:35:17.1277359+07:00||;True|2024-05-10T16:14:04.1698692+07:00||;True|2024-05-10T16:03:29.5056612+07:00||;True|2024-05-09T13:46:59.7463855+07:00||;True|2024-05-08T14:44:20.9315468+07:00||;True|2024-05-07T13:57:08.9839896+07:00||;True|2024-05-07T09:00:59.5148094+07:00||;True|2024-05-03T13:07:52.8512670+07:00||;True|2024-05-03T12:56:37.3451168+07:00||;True|2024-05-03T12:52:01.6578632+07:00||;True|2024-05-03T12:00:47.3979405+07:00||;True|2024-05-03T11:48:17.1668430+07:00||;True|2024-05-03T11:45:42.4597334+07:00||;True|2024-05-03T11:39:38.6431596+07:00||;True|2024-05-03T11:10:58.5964749+07:00||;True|2024-05-03T09:18:27.4231291+07:00||;True|2024-05-02T17:22:02.4956216+07:00||;True|2024-05-02T16:53:06.9837011+07:00||;True|2024-05-02T16:39:02.6636342+07:00||;True|2024-04-26T10:31:45.5283680+07:00||;True|2024-04-26T10:11:18.0848439+07:00||;True|2023-09-18T09:17:52.6135680+07:00||;True|2023-09-18T09:14:42.0927399+07:00||;True|2023-09-18T09:09:44.7202010+07:00||;True|2023-08-26T01:27:32.8269548+07:00||;True|2023-08-17T01:43:39.9047219+07:00||;True|2023-07-11T01:07:55.1562379+07:00||;True|2023-07-06T01:03:52.8423849+07:00||;True|2023-07-06T01:00:56.4299387+07:00||;True|2023-07-06T00:59:06.7554377+07:00||;True|2023-04-16T02:34:25.4868063+07:00||;True|2023-04-16T02:24:30.6689969+07:00||;True|2023-04-16T02:20:10.4910533+07:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bundleconfig.json">
+      <publishTime>06/08/2020 23:01:08</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

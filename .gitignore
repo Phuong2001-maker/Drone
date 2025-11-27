@@ -1,0 +1,47 @@
+/.vs/
+
+# User-specific
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+[Rr]elease/
+[Dd]ebug/
+[Ll]og/
+
+# IDE settings
+.vscode/
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# Logs and diagnostics
+*.log
+*.tlog
+[Bb]uild[Ll]og.*
+[Tt]est[Rr]esult*/
+*.coverage
+*.coveragexml
+coverage*/
+
+# Packages
+*.nupkg
+*.snupkg
+[Pp]ackages/
+*.tmp_proj
+
+# OS-generated
+.DS_Store
+Thumbs.db
+
+# Node/Front-end (if added later)
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
